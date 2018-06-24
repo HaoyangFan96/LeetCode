@@ -1,8 +1,8 @@
 /** 
- * My initial solution to Q2: Add Two Numbers without viewing any solutions or hints
- * @since 2018-06-24
- * @version 1.0
- */
+* My initial solution to Q2: Add Two Numbers without viewing any solutions or hints
+* @since 2018-06-24
+* @version 1.0
+*/
 class InitialSol {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int sum = 0;
@@ -49,5 +49,5 @@ class InitialSol {
             tail.next = l2;
         }
         return head;
-}
+    }
 }
