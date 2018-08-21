@@ -1,5 +1,6 @@
 // JS solution to Q20. "Valid Parentheses"
 // Reference: https://leetcode.com/problems/valid-parentheses/description/
+// Date: 08-20-2018
 
 /**
  * @param {string} s

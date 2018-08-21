@@ -1,5 +1,6 @@
 // Solution to the Q20 "Valid Parentheses"
 // https://leetcode.com/problems/valid-parentheses/description/
+// Date: 08-20-2018
 
 class Solution {
     private boolean isPair(char open, char close) {

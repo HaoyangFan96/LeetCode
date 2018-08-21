@@ -5,6 +5,8 @@
 // and the slow-moving pointer to be always n
 // Reference: https://leetcode.com/problems/remove-nth-node-from-end-of-list/discuss/8804/Simple-Java-solution-in-one-pass
 
+// Date: 08-20-2018
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {

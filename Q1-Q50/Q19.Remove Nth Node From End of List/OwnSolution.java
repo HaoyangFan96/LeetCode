@@ -1,5 +1,6 @@
 // solution to Q19. "Remove Nth Node From End of List"
 // Reference: https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+// Date: 08-20-2018
 
 /**
  * Definition for singly-linked list.
