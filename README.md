@@ -6,7 +6,7 @@ I believe that efforts will eventually pay off!
 Happy Coding
 
 **08-20-2018**
-Complete:
+Complete: 23
 
 **08-21-2018**
 Complete: 5, 26, 27, 28, 29, 30
