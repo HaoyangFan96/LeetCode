@@ -1,6 +1,6 @@
 Knowledge used: two pointers, multiple linkedlist
 
-[source code]:(./Solution.js)
+[code](./Solution.js)
 
 #### 关于这道题提供的Linked List:
 - linked list 不能像partition array一样从两边遍历
