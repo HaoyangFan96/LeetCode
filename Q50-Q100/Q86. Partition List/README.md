@@ -1,6 +1,11 @@
-Knowledge used: two pointers, multiple linkedlist
+Knowledge used: two pointers, multiple Linked Lists
 
 [code](./Solution.js)
+
+#### Complexity:
+- Space: `O(1)`, no additional space used
+- Time: `O(n)`, only iterate through the list once
+
 
 #### 关于这道题提供的Linked List:
 - linked list 不能像partition array一样从两边遍历
