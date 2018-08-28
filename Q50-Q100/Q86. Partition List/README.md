@@ -1,4 +1,6 @@
-Knowledge used: two pointers, multiple Linked Lists
+#### Knowledge used:
+1. two pointers
+2. multiple Linked Lists
 
 [code](./Solution.js)
 
