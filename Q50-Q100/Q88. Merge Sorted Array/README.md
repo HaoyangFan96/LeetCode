@@ -18,7 +18,7 @@ to
 ```
 let curr = m + n - 1;
 ```
-2. 
+2. no need to check:
 ```
 else if (p1 >= 0) {
     nums1[curr--] = nums1[p1--];
