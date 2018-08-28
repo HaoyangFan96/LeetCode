@@ -1,0 +1,21 @@
+Knowledge used: two pointers, multiple linkedlist
+
+[source code]:(./Solution.js)
+
+#### 关于这道题提供的Linked List:
+- linked list 不能像partition array一样从两边遍历
+- 把小于value的加在前半段, 把 >= value的加在后半段
+- 做法很普通: 建造两个list, midTail pointer, post pointer
+- 把满足条件（<x, >=x）的数字分别放到两个list里面
+- 记得用dummyNode track head
+- 最终midTail.next = post链接起来
+
+#### Mistakes I have made:
+1.
+```
+if (a) {
+    a.next = null;
+}
+```
+ 注意一定要讲after（右端linked list）的最后一个node的next设定成null，否则linkedlist不会
+会一直循环链接下去
