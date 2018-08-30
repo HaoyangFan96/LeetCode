@@ -2,7 +2,8 @@
 1. two pointers
 2. multiple Linked Lists
 
-[code](./Solution.js)
+[js code](./Solution.js)
+[java code](./Solution.java)
 
 #### Complexity:
 - Space: `O(1)`, no additional space used
@@ -26,3 +27,6 @@ if (a) {
 ```
  注意一定要讲after（右端linked list）的最后一个node的next设定成null，否则linked list会
  一直循环链接下去而不会中断, 造成runtime exception
+
+#### Review at:
+1. 08-29-2018
