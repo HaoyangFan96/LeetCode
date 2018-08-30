@@ -24,6 +24,28 @@ Output: 1->2->2->4->3->5
  */
 class Solution {
     public ListNode partition(ListNode head, int x) {
-
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode d1 = new ListNode(0), l1 = d1;
+        ListNode d2 = new ListNode(0), l2 = d2;
+        // iterate through the linked list
+        for(ListNode i = head; i != null; i = i.next) {
+            int curr = i.val;
+            // if current node's value is less than target
+            if (curr < x) {
+                l1.next = i;
+                l1 = i;
+            }
+            else {
+                l2.next = i;
+                l2 = i;
+            }
+        }
+        // connect two linked list together by making the next of l1 to point
+        // to the start of l2
+        l1.next = d2.next;
+        l2.next = null;
+        return d1.next;
     }
 }
