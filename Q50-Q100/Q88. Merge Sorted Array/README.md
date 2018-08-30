@@ -25,3 +25,9 @@ else if (p1 >= 0) {
 }
 ```
 actually it is unnecessary for us to check if the first array still has any remaining, because even if there are some remaining, we just keep them as is and need to do nothing about it
+3. NOTE that since we are iterating through nums1 from its end, not its beginning,
+we should always put the `larger` one of nums1 and nums2 with the progress of iteration,
+not the `less` one !
+
+#### Review at:
+1. 08-29-2018
