@@ -29,43 +29,89 @@ class Solution {
         if (nums == null || nums.length <= 1) {
             return;
         }
-        int tail = nums.length - 1;
-        // starting from the end, looking for the first value such that
-        // nums[tail-1] < nums[tail]
-        while(tail > 0) {
-            if (nums[tail - 1] < nums[tail]) {
-                break;
-            }
-            tail--;
+        int counter = nums.length - 1;
+        // First step: iterate nums from the end, find first index such that nums[i-1] < nums[i]
+        while (counter > 0 && nums[counter-1] >= nums[counter]) {
+            counter --;
         }
-        // if tail == 0, then there is no such found, and we can simply reverse
-        // the array
-        if (tail == 0) {
-            for (int i = 0; i < nums.length / 2; i++) {
-                int temp = nums[i];
-                nums[i] = nums[nums.length - i - 1];
-                nums[nums.length - i - 1] = temp;
-            }
+        // NOTE: if counter is 0, then there is no such match, directly reverse the array
+        if (counter == 0) {
+            reverse(nums, 0, nums.length - 1);
             return;
         }
-        // find the index of value in the range of nums[tail] to the end,
-        // which is larger than nums[tail-1] but is the most closes value to it
-        int v = Integer.MAX_VALUE, idx = 0;
-        for(int i = tail; i < nums.length; i++) {
-            if (nums[i] > nums[tail - 1] && nums[i] < v) {
-                v = nums[i];
-                idx = i;
-            }
+        // Second step:
+        // find the index between [counter, nums.length - 1] that is larger than
+        // nums[counter - 1] but is the most one closest to it
+        // 在这里我们可以利用这样一个性质： 在[counter, nums.length-1]这个range中，
+        // 从后往前的方向来看，values为单调递增
+        int i = nums.length - 1;
+        while(i >= counter && nums[i] <= nums[counter-1]){
+            i--;
         }
-        // swap the value
-        int temp = nums[tail - 1];
-        nums[tail - 1] = v;
-        nums[idx] = temp;
-        // reverse the array from tail to the end
-        for(int i = tail; i < tail + (nums.length - tail) / 2; i++){
-            temp = nums[i];
-            nums[i] = nums[nums.length - (i - tail) - 1];
-            nums[nums.length - (i - tail) - 1] = temp;
+        // Third step: do the swap
+        swap(nums, counter - 1, i);
+        // Final step: reverse the nums array of range [counter, nums.length - 1]
+        reverse(nums, counter, nums.length - 1);
+    }
+
+    // helper function to reverse the nums array of range [start, end]
+    private void reverse(int[] nums, int start, int end) {
+        while(start < end) {
+            int temp = nums[start];
+            nums[start++] = nums[end];
+            nums[end--] = temp;
         }
     }
+
+    // helper function to swap a pair of values in nums array
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    // this is my original improved version, which is too messy
+    // public void nextPermutation(int[] nums) {
+    //     if (nums == null || nums.length <= 1) {
+    //         return;
+    //     }
+    //     int tail = nums.length - 1;
+    //     // starting from the end, looking for the first value such that
+    //     // nums[tail-1] < nums[tail]
+    //     while(tail > 0) {
+    //         if (nums[tail - 1] < nums[tail]) {
+    //             break;
+    //         }
+    //         tail--;
+    //     }
+    //     // if tail == 0, then there is no such found, and we can simply reverse
+    //     // the array
+    //     if (tail == 0) {
+    //         for (int i = 0; i < nums.length / 2; i++) {
+    //             int temp = nums[i];
+    //             nums[i] = nums[nums.length - i - 1];
+    //             nums[nums.length - i - 1] = temp;
+    //         }
+    //         return;
+    //     }
+    //     // find the index of value in the range of nums[tail] to the end,
+    //     // which is larger than nums[tail-1] but is the most closes value to it
+    //     int v = Integer.MAX_VALUE, idx = 0;
+    //     for(int i = tail; i < nums.length; i++) {
+    //         if (nums[i] > nums[tail - 1] && nums[i] < v) {
+    //             v = nums[i];
+    //             idx = i;
+    //         }
+    //     }
+    //     // swap the value
+    //     int temp = nums[tail - 1];
+    //     nums[tail - 1] = v;
+    //     nums[idx] = temp;
+    //     // reverse the array from tail to the end
+    //     for(int i = tail; i < tail + (nums.length - tail) / 2; i++){
+    //         temp = nums[i];
+    //         nums[i] = nums[nums.length - (i - tail) - 1];
+    //         nums[nums.length - (i - tail) - 1] = temp;
+    //     }
+    // }
 }
