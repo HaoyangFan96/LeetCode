@@ -1,7 +1,8 @@
 #### Knowledge used:
 1. two pointers
 
-[code](./Solution.js)
+[js](./Solution.js)  
+[java](./Solution.java)
 
 #### Complexity:
 - Space: `O(1)`, no additional space used
@@ -24,7 +25,7 @@ else if (p1 >= 0) {
     nums1[curr--] = nums1[p1--];
 }
 ```
-actually it is unnecessary for us to check if the first array still has any remaining, because even if there are some remaining, we just keep them as is and need to do nothing about it
+actually it is unnecessary for us to check if the first array still has any remaining, because even if there are some remaining, we just keep them as is and need to do nothing about it  
 3. NOTE that since we are iterating through nums1 from its end, not its beginning,
 we should always put the `larger` one of nums1 and nums2 with the progress of iteration,
 not the `less` one !
