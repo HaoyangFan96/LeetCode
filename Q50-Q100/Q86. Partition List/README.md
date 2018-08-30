@@ -6,7 +6,7 @@
 
 #### Complexity:
 - Space: `O(1)`, no additional space used
-- Time: `O(n)`, only iterate through the list once
+- Time: `O(n)`, only iterate through the linked list once
 
 
 #### 关于这道题提供的Linked List:
@@ -24,5 +24,5 @@ if (a) {
     a.next = null;
 }
 ```
- 注意一定要讲after（右端linked list）的最后一个node的next设定成null，否则linkedlist不会
-会一直循环链接下去
+ 注意一定要讲after（右端linked list）的最后一个node的next设定成null，否则linked list会
+ 一直循环链接下去而不会中断, 造成runtime exception
