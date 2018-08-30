@@ -24,4 +24,5 @@ Complete: 86, 88
 Complete: 21, 31, 33
 
 **08-29-2018**
-Complete: 32, 35, 36
+Complete: 32, 35, 36，38，39
+Review: 86, 88, 31
