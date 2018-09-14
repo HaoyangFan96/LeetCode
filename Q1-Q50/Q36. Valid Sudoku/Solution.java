@@ -36,27 +36,18 @@ class Solution {
                 // different columns of the same row
                 char c = board[i][j];
                 // different spot of the same block
-                char b = board[i / 3 * 3 + j % 3][i % 3 * 3 + j % 3];
+                char b = board[i / 3 * 3 + j / 3][i % 3 * 3 + j % 3];
                 // check row
-                if (c != '.' &&  row.contains(c)) {
+                if (c != '.' &&  !row.add(c)) {
                     return false;
-                }
-                else {
-                    row.add(c);
                 }
                 // check column
-                if (r != '.' && col.contains(r)) {
+                if (r != '.' && !col.add(r)) {
                     return false;
-                }
-                else {
-                    col.add(r);
                 }
                 // check block
-                if (b != '.' && block.contains(b)) {
+                if (b != '.' && !block.add(b)) {
                     return false;
-                }
-                else {
-                    block.add(b);
                 }
             }
         }
