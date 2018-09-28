@@ -5,7 +5,7 @@
 
 #### Code
 - [DP java sol](./DPSolution.java)
-
+- [Optimized DP java sol](./OptimizedDPSolution.java)
 #### Complexity
 - Time: `O(n)` since we have to iterate through the whole array once anyway
 - Space: `O(n)` if we are using one-dimensional dp array, which can be optimized by applying the idea of "滚动数组", leading to a `O(1)` space
