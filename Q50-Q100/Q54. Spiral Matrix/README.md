@@ -13,7 +13,7 @@
 
 #### Idea:
 1. https://leetcode.com/problems/spiral-matrix/solution/ 官方的solution已经讲解的很清楚了
-2. 我一开始自己的解法是[layer by layer](./Solution1.java)而后来发现其实[simulation](./Solution2.java)更容易理解
+2. 我一开始自己的解法是[layer by layer](./Solution.java)而后来发现其实[simulation](./Solution2.java)的思路要更容易理解并记住
 3. 这道题并不难，只是很难一次性bug free写对，有很多需要注意的细节
 
 #### Mistakes I have made:
@@ -27,6 +27,7 @@ Should have:
     }
     ...
     ```
-2. [Solution 2](./Solution2.java)中忘记更新[currentRow](./Solution2.java#69)和currentCol
-
+2. [Solution 2](./Solution2.java)中忘记更新[currentRow](./Solution2.java#L69)和[currentCol](./Solution2.java#L70)
+3. [Solution 2](./Solution2.java)中忘记检查`nextRow`和`nextCol`是否大于等于0,
+[see](./Solution2.java#L64)
 #### Review At:

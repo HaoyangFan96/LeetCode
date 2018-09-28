@@ -7,6 +7,8 @@
  * 将整个螺旋形的过程看作如下的方式：
  * 最外圈顺时针360度走一圈(按上->右->下->左的顺序),将沿途所经的element加入到list
  * 之后逐步缩小范围，进行同样的顺时针操作，直到matrix中的所有element都被添加到list中为止
+ * Time: O(n) since we basically scan each element once
+ * Space: O(n) need a list to hold all elements
  */
 
 /*
