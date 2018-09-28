@@ -9,7 +9,7 @@
  * 1) https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
  * 2) https://www.youtube.com/watch?v=86CQq3pKSUw
  * Time: O(n)
- * Space: O(n), with the use of one-dimensinoal dp array
+ * Space: O(1), 使用滚动数组来压缩DP的空间
  */
 
 /*
@@ -25,28 +25,20 @@ Follow up:
 If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 */
 
-/**
- * @author Haoyang Fan
- * @version 1.0
- * @since 09-27-2018
- * Initial dp solution in java
- */
-
- class Solution {
-     public int maxSubArray(int[] nums) {
-         if (nums ==  null || nums.length == 0) {
-             throw new IllegalArgumentException();
-         }
-         // one-dimension dp
-         int[] dp = new int[nums.length];
-         dp[0] = nums[0];
-         int res = nums[0];
-         // begin to iterate through the array
-         for(int i = 1; i < nums.length; i++) {
-             dp[i] = nums[i] + (dp[i-1] > 0 ? dp[i-1] : 0);
-             // update the global max
-             res = Math.max(dp[i], res);
-         }
-         return res;
-     }
- }
+class Solution {
+    public int maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        // variable which keeps track of the sum of current maximum subarray which
+        // ends at index i, which mean that nums[i] must be included in that subarray
+        // variable which keeps track of the global maximum subarray sum
+        int res = nums[0];
+        int currMax = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            currMax = nums[i] + (currMax > 0 ? currMax : 0);
+            res = Math.max(res, currMax);
+        }
+        return res;
+    }
+}
