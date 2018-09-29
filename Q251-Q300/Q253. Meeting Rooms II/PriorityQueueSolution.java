@@ -33,6 +33,13 @@
  * Space: O(n), for the use of priority queue
  */
 
+/**
+ * @author Haoyang Fan
+ * @version 1.0
+ * @since 09-28-2018
+ * PriorityQueue solution in java
+ */
+
  /**
   * Definition for an interval.
   * public class Interval {
