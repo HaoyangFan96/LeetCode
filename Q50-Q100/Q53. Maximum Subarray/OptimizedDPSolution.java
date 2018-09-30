@@ -25,6 +25,41 @@ Follow up:
 If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 */
 
+/**
+ * @author Haoyang Fan
+ * @version 2.0
+ * @since 09-29-2018
+ * Review the optimized dp solution in java
+ */
+
+ class Solution {
+     public int maxSubArray(int[] nums) {
+         if (nums == null || nums.length == 0) {
+             return 0;
+         }
+         // variable to track the global maximum subarray sum value encountered so far
+         int max = nums[0];
+         // variable to track the maximum sum value of subarray that ends at the previous index
+         int maxEndPrev = nums[0];
+         // iterate through the numbers, starting from the second one
+         for (int i = 1; i < nums.length; i++) {
+             maxEndPrev = nums[i] + (maxEndPrev > 0 ? maxEndPrev : 0);
+             // update the global maximum subarray sum value
+             max = Math.max(max, maxEndPrev);
+         }
+         return max;
+     }
+ }
+
+/*----------------------------------------------------------------------------*/
+
+/**
+ * @author Haoyang Fan
+ * @version 1.0
+ * @since 09-27-2018
+ * Optimized O(1) space DP solution in java
+ */
+
 class Solution {
     public int maxSubArray(int[] nums) {
         if (nums == null || nums.length == 0) {
