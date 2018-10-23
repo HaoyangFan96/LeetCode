@@ -1,4 +1,4 @@
-### Problem  ["Longest Substring with At Most K Distinct Characters"](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/description/)
+Â### Problem  ["Longest Substring with At Most K Distinct Characters"](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/description/)
 
 #### Knowledge Used:
 1. two pointers
@@ -21,16 +21,16 @@
 假设当前的window中已包含k个独特的字符，那么如果当前右端指针对应的字符为一个全新的，之前没有见过的字符
 的话，那么while循环的条件已不满足，循环应该中止  
 之前的while循环条件：
-```
-while(right < n && numOfDistinct <= k) {
-    ...
-}
-```
+    ```
+    while(right < n && numOfDistinct <= k) {
+        ...
+    }
+    ```
 现改为：
-```
-while (right < n && (numOfDistinct < k ? true : counts[s.charAt(right)] > 0)) {
-    ...
-}
-```
+    ```
+    while (right < n && (numOfDistinct < k ? true : counts[s.charAt(right)] > 0)) {
+        ...
+    }
+    ```
 
 #### Review At:
