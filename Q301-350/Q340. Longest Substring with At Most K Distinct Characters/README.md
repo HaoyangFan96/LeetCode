@@ -26,7 +26,7 @@
         ...
     }
     ```
-现改为：
+    现改为：
     ```
     while (right < n && (numOfDistinct < k ? true : counts[s.charAt(right)] > 0)) {
         ...
