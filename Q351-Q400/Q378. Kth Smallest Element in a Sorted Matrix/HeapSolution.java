@@ -5,10 +5,9 @@
 /**
  * Thoughts:
  * 跟Q215 heap解法类似，具体的过程描述可参考九章算法强化版第一节课笔记的下班部分
- * 1. 创建一个max heap，保持size为k
- * 2. 从左上开始，把途径的所有有可能的candidate的value加入到max heap中，注意heap的size
- * 不能超过k
- * 3. 在遍历过所有的element后，将max heap的topmost elment return
+ * 1. 创建一个min heap
+ * 2. 将头一行或者头一列的element全部添加进去
+ * 3. poll out掉头k-1个element，接下来的heap的topmost element即为kth smallest one
  */
 
 /*
