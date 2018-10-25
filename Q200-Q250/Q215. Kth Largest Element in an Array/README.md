@@ -6,7 +6,7 @@
 3.  Array
 
 #### Code
--   [java heap solution]("./HeapSolution.java")
+-   [java heap solution](./HeapSolution.java)
 
 #### Complexity
 -   For heap solution:
