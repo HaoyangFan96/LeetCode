@@ -9,7 +9,7 @@
  * v-1, v-2, v-3, ... and v+1, v+2, v+3, ...
  * Typically this is usually done by using a hashmap (hashset) or array.
  * In this problem, the array way is obviously not gonna to work, so need to
- * use a hashset for it
+ * use a hashset for it.
  *
  * algorithms:
  * 1. First add all elements in the array to the HashSet
@@ -32,6 +32,13 @@
  Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
   */
 
+/**
+ * Initial HashSet solution in Java.
+ *
+ * @author Haoyang Fan
+ * @version 1.0
+ * @since 10-30-2018
+ */
 class Solution {
     public int longestConsecutive(int[] nums) {
         if (nums == null || nums.length == 0) {
