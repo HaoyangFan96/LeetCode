@@ -24,9 +24,9 @@
 
 #### Mistakes I have made:
 1.  Union Find 的 union 中，一开始找p和q的root居然忘记了用`find`, 而是错误地使用了`parent.get()`:
-```
-int rootP = parent.get(p); // should be: int rootP = find(p)
-int rootQ = parent.get(q); // should be: int rootQ = find(q)
-```
+    ```
+    int rootP = parent.get(p); // should be: int rootP = find(p)
+    int rootQ = parent.get(q); // should be: int rootQ = find(q)
+    ```
 
 #### Review At:
