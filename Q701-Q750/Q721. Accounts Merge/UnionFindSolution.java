@@ -77,7 +77,6 @@ The length of accounts[i][j] will be in the range [1, 30].
  * @version 2.0
  * @since 11-4-2018
  */
-
 class UnionFind {
     protected int[] parent;
     protected int[] rank;
@@ -182,7 +181,6 @@ class Solution {
  * @version 1.0
  * @since 11-1-2018
  */
-
 class Node {
     protected String owner;
     protected List<String> emails = new ArrayList<>(10);
