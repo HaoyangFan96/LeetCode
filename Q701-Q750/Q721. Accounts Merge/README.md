@@ -19,7 +19,7 @@
 -   Space: `O(A)`, the space used by different HashMap and union find data structure
 
 #### Idea:
-1.   九章算法强化班的思路 （参见九章算法版第二节课下半部分笔记开头部分）：
+1.  九章算法强化班的思路 （参见九章算法版第二节课下半部分笔记开头部分）：
     1.  通常来说，对于这样的问题，我们往往是将owner name当作index(类似于SQL中的primary key)即一个owner name名下对应了所有的email (正向索引 forward index)  
     e.g. John : [[john1@gmail.com], [john2@gmail.com], [john3@gmail.com]]
     2.  那么反过来说我们可不可以设立一个inverted index，即每个email对应了所有与其关联的人的ID(这里我们可以使用一个小技巧将string name转化为int index, 使得union find更好处理。  
