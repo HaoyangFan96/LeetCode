@@ -12,7 +12,7 @@
 3.  九章算法班第六节课下半部分笔记对于这道题的讲解
 
 #### Code
--   [Java DP 2D Array](./Solution.java)
+-   [Java DP 2D Array](./DPSolution.java)
 -   [Java DFS + Memoization](./MemoizationSolution.java)
 -   [Java Iterative O(n)](./IterativeSolution.java)
 -   [JS solution](./Solution.js)
