@@ -12,6 +12,10 @@
  * NOTE: 需要注意的点，对于负power的处理：
  * 由于power的范围是从Integer.MIN_VALUE到Integer.MAX_VALUE，直接将Integer.MIN_VALUE
  * negate的话会overflow
+ *
+ * Time: O(logn)
+ *
+ * Space: O(logn), which is due to the use of recursion (non-tail recursion)
  */
 
 /*
@@ -35,6 +39,99 @@ Note:
 -100.0 < x < 100.0
 n is a 32-bit signed integer, within the range [−231, 231 − 1]
 */
+
+/**
+ * Review problem solution in Java.
+ *
+ * @author Haoyang Fan
+ * @version 5.0
+ * @since 12-13-2018
+ */
+class Solution {
+    public double myPow(double x, int n) {
+        // base case 1: the base is 0
+        if (x == 0.0)   return 0.0;
+        // in case the power is negative, we need to negate the power
+        // NOTE: be careful with overflow when n == - 2^31 (Integer.MIN_VALUE)
+        long ln = n;
+        if (n < 0)  return helper(1/x, -ln);
+        return helper(x, ln);
+    }
+
+    private double helper(double x, long n) {
+        if (n == 0) return 1;
+        if (n == 1) return x;   // add one more base case to reduce the stack depth
+        double temp = helper(x, n/2);
+        if ((n & 1) == 1)   {
+            return temp * temp * x;
+        } else {
+            return temp * temp;
+        }
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
+ * Review problem in Java.
+ *
+ * @author Haoyang Fan
+ * @version 4.0
+ * @since 11-25-2018
+ */
+class Solution {
+    public double myPow(double x, int n) {
+        if (n == 0) return 1.0
+        if (x == 0.0)   return 0.0
+        if (n < 0)  return helper(1.0/x, n);
+        return helper(x, n);
+    }
+
+    private double helper(double x, int n) {
+        if (n == 0) return 1;
+        if (n == 1) return x;
+        double temp = helper(x, n/2);
+        if ((n & 1) == 1)   {
+            return x * temp * temp;
+        } else {
+            return temp * temp;
+        }
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
+ * Review the recursive solution in java, implemented using fast power algorithm.
+ * Reference: https://www.jiuzhang.com/tutorial/algorithm/332
+ *
+ * @author Haoyang Fan
+ * @version 3.0
+ * @since 11-20-2018
+ */
+class Solution {
+    public double myPow(double x, int n) {
+        if (n < 0)  {
+            return 1 / helper(x, -n);
+        } else {
+            return helper(x, n);
+        }
+    }
+    private double helper(double x, int n) {
+        if (n == 0) return 1;
+        if (n == 1) return x;
+
+        // remember the result to avoid repetitive computation
+        double temp = helper(x, n / 2);
+        if ((n & 1) == 1) {
+            return x * temp * temp;
+        } else {
+            return temp * temp;
+        }
+    }
+}
+
+/*----------------------------------------------------------------------------*/
 
 /*
  * Time Limit Exception:
