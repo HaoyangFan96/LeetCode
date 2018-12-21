@@ -59,8 +59,8 @@ Note that the answer must be a substring, "pwke" is a subsequence and not a subs
  * Review HashMap
  *
  * @author Haoyang Fan
- * @version 1.0
- * @since
+ * @version 3.0
+ * @since 12-20-2018
  */
 class Solution {
     public int lengthOfLongestSubstring(String s) {
