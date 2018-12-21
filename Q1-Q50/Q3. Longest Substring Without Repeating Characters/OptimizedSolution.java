@@ -56,28 +56,37 @@ Note that the answer must be a substring, "pwke" is a subsequence and not a subs
  */
 
 /**
- * HashSet solution in Java, which will be less efficient compared with HashMap
- * solution in v2.
+ * Review HashMap
  *
  * @author Haoyang Fan
- * @version 3.0
- * @since 12-20-2018
+ * @version 1.0
+ * @since
  */
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         if (s == null || s.isEmpty())   return 0;
-        Set<Character> set = new HashSet<>();
+        Map<Character, Integer> map = new HashMap<>();
+        int maxLen = 1;
         char[] chs = s.toCharArray();
-        int max = 1;
+        // initialize the right pointer, which will always monotonously increase
         int j = 0;
+        // initialize the left pointer, which will iterate through the string in one pass
         for (int i = 0; i < chs.length; i++) {
-            while (j < chs.length && !set.contains(chs[j])) {
-                set.add(chs[j++]);
+            while (j < chs.length && !map.getOrDefault(s.charAt(j), -1) < i) {
+                // add current character and its index in the string to the map
+                // so that later we can easily track back to here
+                map.put(chs[j], j);
+                j++;
             }
-            max = Math.max(max, j - i);
-            set.remove(chs[i]);
+
+            // 打擂台
+            maxLen = Math.max(maxLen, j - i);
+            // backtrack to the previous index of the repeating character
+            if (j < chs.length) {
+                i = map.get(chs[j]);
+            }
         }
-        return max;
+        return maxLen;
     }
 }
 
@@ -102,7 +111,7 @@ class Solution {
          // initialize the left pointer
          for (int left = 0; left < n; left++) {
              // if there is no repeating charcter, keep moving the right pointer to the right
-             while (right < n && indices.getOrDefault(s.charAt(right), -1) < left) {
+             while (j < chs.length && map.getOrDefault(s.charAt(j), -1) < i) {
                  // record the current character and its index
                  indices.put(s.charAt(right), right++);
              }

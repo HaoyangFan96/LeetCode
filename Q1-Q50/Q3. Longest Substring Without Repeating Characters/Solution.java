@@ -25,6 +25,41 @@ Explanation: The answer is "wke", with the length of 3.
              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 */
 
+/**
+ * HashSet solution in Java, which will be less efficient compared with HashMap
+ * solution in OptimizedSolution.java
+ *
+ * @author Haoyang Fan
+ * @version 2.0
+ * @since 12-20-2018
+ */
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.isEmpty())   return 0;
+        Set<Character> set = new HashSet<>();
+        char[] chs = s.toCharArray();
+        int max = 1;
+        int j = 0;
+        for (int i = 0; i < chs.length; i++) {
+            while (j < chs.length && !set.contains(chs[j])) {
+                set.add(chs[j++]);
+            }
+            max = Math.max(max, j - i);
+            set.remove(chs[i]);
+        }
+        return max;
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
+ * Initial HashSet solution in Java.
+ *
+ * @author Haoyang Fan
+ * @version 1.0
+ * @since 09-08-2018
+ */
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         int max = 0;
