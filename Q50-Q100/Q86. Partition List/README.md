@@ -1,22 +1,22 @@
 #### Knowledge used:
-1. two pointers
-2. multiple Linked Lists
+1.  two pointers
+2.  multiple Linked Lists
 
-[js code](./Solution.js)  
-[java code](./Solution.java)
+[JavaScript solution](./Solution.js)  
+[Java Solution](./Solution.java)
 
 #### Complexity:
-- Space: `O(1)`, no additional space used
-- Time: `O(n)`, only iterate through the linked list once
+-   Space: `O(1)`, no additional space used
+-   Time: `O(n)`, only iterate through the linked list once
 
 
 #### 关于这道题提供的Linked List:
-- linked list 不能像partition array一样从两边遍历
-- 把小于value的加在前半段, 把 >= value的加在后半段
-- 做法很普通: 建造两个list, midTail pointer, post pointer
-- 把满足条件（<x, >=x）的数字分别放到两个list里面
-- 记得用dummyNode track head
-- 最终midTail.next = post链接起来
+-   linked list 不能像partition array一样从两边遍历
+-   把小于value的加在前半段, 把 >= value的加在后半段
+-   做法很普通: 建造两个list, midTail pointer, post pointer
+-   把满足条件（<x, >=x）的数字分别放到两个list里面
+-   记得用dummyNode track head
+-   最终midTail.next = post链接起来
 
 #### Mistakes I have made:
 1.
@@ -29,4 +29,5 @@ if (a) {
  一直循环链接下去而不会中断, 造成runtime exception
 
 #### Review at:
-1. 08-29-2018
+1.  08-29-2018
+2.  12-20-2018

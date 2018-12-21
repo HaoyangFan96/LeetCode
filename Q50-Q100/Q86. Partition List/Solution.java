@@ -22,6 +22,49 @@ Output: 1->2->2->4->3->5
  *     ListNode(int x) { val = x; }
  * }
  */
+
+/**
+ * Review solution in Java.
+ *
+ * @author Haoyang Fan
+ * @version 1.0
+ * @since 12-20-2018
+ */
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        if (head == null || head.next == null)  return head;
+
+        ListNode l = new ListNode(0), lcurr = l; // head of list in which nodes are >= x
+        ListNode s = new ListNode(0), scurr = s; // head of list in which nodes are < x
+        ListNode curr = head;
+
+        // iterate through the linked list only once
+        while (curr != null) {
+            if (curr.val < x) {
+                scurr.next = curr;
+                scurr = curr;
+            } else {
+                lcurr.next = curr;
+                lcurr = curr;
+            }
+            curr = curr.next;
+        }
+        scurr.next = l.next;
+        // NOTE: don't forget this, ignoring it will cause MLE
+        lcurr.next = null;
+        return s.next;
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
+ * Initial Two Pointers solution in Java.
+ *
+ * @author Haoyang Fan
+ * @version 1.0
+ * @since 08-28-2018
+ */
 class Solution {
     public ListNode partition(ListNode head, int x) {
         if (head == null || head.next == null) {
