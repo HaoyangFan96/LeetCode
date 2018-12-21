@@ -56,6 +56,34 @@ Note that the answer must be a substring, "pwke" is a subsequence and not a subs
  */
 
 /**
+ * HashSet solution in Java, which will be less efficient compared with HashMap
+ * solution in v2.
+ *
+ * @author Haoyang Fan
+ * @version 3.0
+ * @since 12-20-2018
+ */
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.isEmpty())   return 0;
+        Set<Character> set = new HashSet<>();
+        char[] chs = s.toCharArray();
+        int max = 1;
+        int j = 0;
+        for (int i = 0; i < chs.length; i++) {
+            while (j < chs.length && !set.contains(chs[j])) {
+                set.add(chs[j++]);
+            }
+            max = Math.max(max, j - i);
+            set.remove(chs[i]);
+        }
+        return max;
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
  * @author Haoyang Fan
  * @version 2.0
  * @since 10-23-2018
@@ -88,7 +116,6 @@ Note that the answer must be a substring, "pwke" is a subsequence and not a subs
          return maxLen;
      }
  }
-
 
 /*----------------------------------------------------------------------------*/
 
