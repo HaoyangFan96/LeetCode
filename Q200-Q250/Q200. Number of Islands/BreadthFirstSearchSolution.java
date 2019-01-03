@@ -6,6 +6,15 @@
  * Thoughts:
  * Iterate through all spots, for each spot which is land and is not visited, do
  * a bfs on it and increment the number of island by 1
+ *
+ * Time: O(mn) where m is the number of rows and n is number of columns
+ *
+ * Space: O(min(M,N)) because in worst case where the grid is filled with lands,
+ * the size of queue can grow up to min(M,N)
+ *
+ * TODO: instead of using Coord class or int[], just use integer where value =
+ * row idx * number of cols + column index
+ *
  */
 
  /*
@@ -32,6 +41,63 @@
 
  Output: 3
 */
+
+/**
+ * Review BFS solution in Java. Replace Coord class with int array to represent coord.
+ *
+ * @author Haoyang Fan
+ * @version 2.0
+ * @since 01-02-2018
+ */
+class Solution {
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0) return 0;
+        int rows = grid.length, cols = grid[0].length;
+        int islands = 0;
+        // scan through 2D array, find each land that hasn't been marked by BFS and start BFS on it
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                // in case the land is still unmarked
+                if (grid[i][j] == '1') {
+                    bfs(grid, i, j);
+                    islands++;
+                }
+            }
+        }
+        return islands;
+    }
+
+    private void bfs(char[][] grid, int r, int c) {
+        int[] directX = {-1, 1, 0, 0};
+        int[] directY = {0, 0, -1, 1};
+        int rows = grid.length, cols = grid[0].length;
+        // initialize the Queue for BFS
+        Deque<int[]> queue = new ArrayDeque<>();
+        // enqueue the starting coord and mark it
+        int[] startCoord = {r, c};
+        grid[r][c] = 'X';
+        queue.addLast(startCoord);
+        while (!queue.isEmpty()) {
+            int[] coord = queue.removeFirst();
+            // iterate through its adjacent spots to find unmarked lands
+            for (int i = 0; i < directX.length; i++) {
+                int nextR = coord[0] + directX[i], nextC = coord[1] + directY[i];
+                if (isValid(grid, nextR, nextC, rows, cols)) {
+                    // mark that coord and enqueue it
+                    int[] nextCoord = {nextR, nextC};
+                    grid[nextR][nextC] = 'X';
+                    queue.addLast(nextCoord);
+                }
+            }
+        }
+    }
+
+    private boolean isValid(char[][] grid, int r, int c, int rows, int cols) {
+        return r >= 0 && r < rows && c >= 0 && c < cols && grid[r][c] == '1';
+    }
+}
+
+/*----------------------------------------------------------------------------*/
 
 /**
  * BFS solution in java
