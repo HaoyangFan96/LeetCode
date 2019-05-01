@@ -4,10 +4,9 @@
 // 2. https://leetcode.com/problems/next-permutation/solution/
 // Date: 08-28-2018
 
-// 基本思路，从右向左遍历
-// 1. 找第一个nums[k-1] < nums[k]
-// 2. 将nums[k-1]与nums[k]到结尾中比nums[k-1]大，但最为接近nums[k-1]的值互换
-// 3. 将nums[k-1]到结尾的值reverse
+// 基本思路，从右向左遍历，找第一个nums[k-1] < nums[k]
+// 接下来，再次从右向左遍历，将nums[k-1]与nums[k]到结尾中比nums[k-1]大，但最为接近nums[k-1]的值互换
+// 最终将nums[k]到结尾的值reverse
 
 /*
 Pick One
@@ -24,6 +23,64 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 1,1,5 → 1,5,1
 */
 
+/**
+ * Review solution in Java.
+ *
+ * @author Haoyang Fan
+ * @version 2.0
+ * @since 05-01-2019
+ */
+class Solution {
+    public void nextPermutation(int[] nums) {
+        if (nums == null || nums.length <= 1) return;
+
+        // k will be used to record the first position (wrt right) that is less
+        // than (strictly) than its right element => nums[k] < nums[k + 1]
+        // aka. all elements on it right form a decreasing sequence
+        // nums[k + 1] >= nums[k + 2] .... >= nums[nums.length - 1]
+        int k;
+        for (k = nums.length - 2; k >= 0; k--) {
+            if (nums[k] < nums[k + 1]) break;
+        }
+
+        // NOTE: do it only if k >= 0 (aka such element does exist in the array)
+        // iterate from right to left again, find the smallest element that is
+        // larger (strictly) than nums[k], exchange their position
+        if (k >= 0) {
+            int i;
+            for (i = nums.length - 1; i > k; i--) {
+                if (nums[i] > nums[k]) {
+                    break;
+                }
+            }
+
+            // exchange nums[j] and nums[k]
+            swap(nums, i, k);
+        }
+
+        // reverse the part of array in the range [k + 1 ... end]
+        int i = k + 1, j = nums.length - 1;
+        while (j > i) {
+            swap(nums, i++, j--);
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        nums[i] ^= nums[j];
+        nums[j] ^= nums[i];
+        nums[i] ^= nums[j];
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
+ * Initial solution in Java.
+ *
+ * @author Haoyang Fan
+ * @version 1.0
+ * @since 08-28-2018
+ */
 class Solution {
     public void nextPermutation(int[] nums) {
         if (nums == null || nums.length <= 1) {
