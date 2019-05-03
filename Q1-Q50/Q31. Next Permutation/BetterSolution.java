@@ -27,6 +27,55 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
  * Review solution in Java.
  *
  * @author Haoyang Fan
+ * @version 3.0
+ * @since 05-02-2019
+ */
+class Solution {
+    public void nextPermutation(int[] nums) {
+        // deal with corner cases first: nums == null, nums is empty or nums only has 1 element
+        if (nums == null || nums.length <= 1) return;
+
+        // 1st iteration: iterating from right to left, find the first element
+        // such that it is strictly less than the element right to it
+        // record its position
+        int i;
+        for (i = nums.length - 2; i >= 0; --i) {
+            if (nums[i] < nums[i + 1]) break;
+        }
+
+        // if such an element exists, then iterate from right to left again
+        // this time, find the smallest element, which is the first element that
+        // is strictly larger than nums[i]
+        if (i >= 0) { // need to make sure such element (nums[i]) exist first
+            int j;
+            for (j = nums.length - 1; j > i; --j) {
+                if (nums[j] > nums[i]) break;
+            }
+
+            // switch nums[i] with nums[j]
+            swap(nums, i, j);
+        }
+
+        // reverse the part of array in range [i + 1 ... nums.length - 1]
+        int start = i + 1, end = nums.length - 1;
+        while (start < end) {
+            swap(nums, start++, end--);
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        nums[i] ^= nums[j];
+        nums[j] ^= nums[i];
+        nums[i] ^= nums[j];
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
+ * Review solution in Java.
+ *
+ * @author Haoyang Fan
  * @version 2.0
  * @since 05-01-2019
  */
