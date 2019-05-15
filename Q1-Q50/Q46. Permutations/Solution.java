@@ -49,8 +49,8 @@ Output:
  * permutation offered by jiuzhang algorithm class tutorial.
  *
  * @author Haoyang Fan
- * @version
- * @since
+ * @version 1.0
+ * @since 05-15-2019
  */
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
