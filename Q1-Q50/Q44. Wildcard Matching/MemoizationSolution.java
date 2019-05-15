@@ -17,7 +17,12 @@
  * depending on the reference not its elments' values
  * https://stackoverflow.com/questions/15576009/how-to-make-hashmap-work-with-arrays-as-key
  *
- * 详见 九章算法班第六节课笔记下半部分
+ * 详见 九章算法班第六节课笔记下半部分09:00
+ * 重点理解“*”号的作用：吃字符，吃掉source的1个字符（recursive下去的话即为吃掉多个字符，或者吃掉source的0个字符）
+ *
+ * NOTE: refer to version 2.0 because it has very detailed explanation and follow
+ * the standard way offered by jiuzhang
+ *
  */
 
 /*
@@ -66,6 +71,142 @@ s = "acdcb"
 p = "a*c?b"
 Output: false
  */
+
+/**
+ * Review DFS + Memoization solution in Java.
+ *
+ * @author Haoyang Fan
+ * @version 3.0
+ * @since 05-15-2019
+ */
+class Solution {
+    public boolean isMatch(String s, String p) {
+         int sLen = s.length(), pLen = p.length();
+
+         boolean[][] visited = new boolean[sLen][pLen];
+         boolean[][] memo = new boolean[sLen][pLen];
+
+         return dfs(s, 0, p, 0, visited, memo);
+    }
+
+    private boolean dfs(String source, int si, String pattern, int pi, boolean[][] visited, boolean[][] memo) {
+        int sLen = source.length(), pLen = pattern.length();
+        // in case we've matched every character of pattern string
+        if (pi == pLen) return si == sLen; // then we must have also matched every character of source
+
+        // in case we've matched every character of source string
+        if (si == sLen) {
+            // then only asterisks are allowed to remain in the pattern string
+            for (int i = pi; i < pLen; ++i) {
+                if (pattern.charAt(i) != '*') return false;
+            }
+            return true;
+        }
+
+        // in case we've calculated this result in the memo buffer
+        if (visited[si][pi]) return memo[si][pi];
+
+        boolean canMatch = false;
+
+        // in case the current character of pattern is not asterisk
+        if (pattern.charAt(pi) != '*') {
+            canMatch |= checkMatch(source, si, pattern, pi) && dfs(source, si + 1, pattern, pi + 1, visited, memo);
+        }
+
+        // in other case the current character is asterisk
+        else {
+            // either match 0 character of source string
+            canMatch |= dfs(source, si, pattern, pi + 1, visited, memo);
+
+            // or match 1 character of source string
+            canMatch |= dfs(source, si + 1, pattern, pi, visited, memo);
+        }
+
+        // add result to memo for future's reference
+        visited[si][pi] = true;
+        memo[si][pi] = canMatch;
+        return canMatch;
+    }
+
+    private boolean checkMatch(String source, int si, String pattern, int pi) {
+        char s = source.charAt(si), p = pattern.charAt(pi);
+        return s == p || p == '?';
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
+ * Review DFS + memoization solution in Java.
+ *
+ * @author Haoyang Fan
+ * @version 2.0
+ * @since 05-13-2019
+ */
+class Solution {
+    public boolean isMatch(String s, String p) {
+        int sLen = s.length(), pLen = p.length();
+
+        // create boolean arrays that will be used for memoization
+        // which save overhead by avoid doing repeated calculation
+        boolean[][] visited = new boolean[sLen][pLen];
+        boolean[][] memo = new boolean[sLen][pLen];
+
+        return dfs(s, 0, p, 0, visited, memo);
+    }
+
+    private boolean dfs(String source, int si, String pattern, int pi, boolean[][] visited, boolean[][] memo) {
+        int sLen = source.length(), pLen = pattern.length();
+
+        // case 1: we've matched all characters of pattern string
+        // in order for both to match, then we must have also matched all characters
+        // of source string
+        if (pi == pLen) return si == sLen;
+
+        // case 2: we've matched all characters of source string
+        // in order for them to match, then there must be only "*" left in the
+        // remaining unmatched portion of pattern string
+        if (si == sLen) {
+            for (int i = pi; i < pLen; ++i) {
+                if (pattern.charAt(i) != '*') return false;
+            }
+            return true;
+        }
+
+        // case 3: the result is already calculated before and is cached in memo
+        if (visited[si][pi]) return memo[si][pi];
+
+        boolean canMatch = false;
+
+        // case 4: the current character of pattern is not "*"
+        if (pattern.charAt(pi) != '*') {
+            // try to match pattern[pi] with source[si]
+            canMatch |= checkMatch(source, si, pattern, pi) && dfs(source, si + 1, pattern, pi + 1, visited, memo);
+        }
+
+        // case 5: the current character of pattern is asterisk "*"
+        else {
+            // sub case 1: this asterisk match 0 character of source
+            canMatch |= dfs(source, si, pattern, pi + 1, visited, memo);
+
+            // sub case 2: this asterisk match 1 character of source
+            if (!canMatch) // we don't have to do this if both strings are already matched by the first way
+                canMatch |= dfs(source, si + 1, pattern, pi, visited, memo);
+        }
+
+        // add result to memo to save for future's reference
+        visited[si][pi] = true;
+        memo[si][pi] = canMatch;
+        return canMatch;
+    }
+
+    private boolean checkMatch(String source, int si, String pattern, int pi) {
+        char s = source.charAt(si), p = pattern.charAt(pi);
+        return s == p || p == '?';
+    }
+}
+
+/*----------------------------------------------------------------------------*/
 
 /**
  * Initial DP + memoization solution in Java.
