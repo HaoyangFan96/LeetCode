@@ -27,6 +27,56 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
  * Review solution in Java.
  *
  * @author Haoyang Fan
+ * @version 4.0
+ * @since 05-14-2019
+ */
+class Solution {
+    public void nextPermutation(int[] nums) {
+        if (nums == null || nums.length == 0) return;
+
+        // iterating from the end: looks for the first element which is strictly
+        // less than its previous element
+        int i;
+        for (i = nums.length - 2; i >= 0; --i) {
+            if (nums[i] < nums[i + 1]) break;
+        }
+
+        // if such element does exist: iterating from the end again. This time,
+        // look for the first element which is strictly greater than this element
+        // then swap them in-place
+        if (i >= 0) {
+            int j;
+            for (j = nums.length - 1; j > i; --j) {
+                if (nums[j] > nums[i]) break;
+            }
+            // swap them
+            swap(nums, i, j);
+        }
+
+        // reverse the whole array if there is no such element; otherwise, reverse
+        // the part of array from i + 1 till the end
+        swapInRange(nums, i + 1, nums.length - 1);
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        nums[i] ^= nums[j];
+        nums[j] ^= nums[i];
+        nums[i] ^= nums[j];
+    }
+
+    private void swapInRange(int[] nums, int start, int end) {
+        while (start < end) {
+            swap(nums, start++, end--);
+        }
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
+ * Review solution in Java.
+ *
+ * @author Haoyang Fan
  * @version 3.0
  * @since 05-02-2019
  */
