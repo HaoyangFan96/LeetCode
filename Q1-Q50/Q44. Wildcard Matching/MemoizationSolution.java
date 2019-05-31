@@ -76,6 +76,77 @@ Output: false
  * Review DFS + Memoization solution in Java.
  *
  * @author Haoyang Fan
+ * @version 4.0
+ * @since 05-31-2019
+ */
+class Solution {
+    public boolean isMatch(String s, String p) {
+        int sLen = s.length(), pLen = p.length();
+
+        // initialize memoization array to cache the result of DFS later
+        boolean[][] visited = new boolean[sLen][pLen];
+        boolean[][] memo = new boolean[sLen][pLen];
+
+        return dfs(s, 0, p, 0, visited, memo);
+    }
+
+    private boolean dfs(String s, int si, String p, int pi, boolean[][] visited, boolean[][] memo) {
+        int sLen = s.length(), pLen = p.length();
+
+        // case 1: we have matched every character of pattern, then we need to
+        // check if we've also matched every character of source
+        if (pi == pLen) return si == sLen;
+
+        // case 2: we have matched every character of source string, then we need to
+        // ensure that only asterisk remains in the rest of pattern string
+        if (si == sLen) return checkPattern(p, pi);
+
+        // case 3: we have calculated this combination of (si, pi) before and result
+        // is already cached in memo
+        if (visited[si][pi]) return memo[si][pi];
+
+        boolean canMatch = false;
+
+        // case 4: current character is asterisk
+        if (p.charAt(pi) == '*') {
+            // sub case 1: this asterisk match 0 character of source
+            canMatch |= dfs(s, si, p, pi + 1, visited, memo);
+
+            // sub case 2: this asterisk match 1 character of source
+            canMatch |= dfs(s, si + 1, p, pi, visited, memo);
+        }
+
+        // case 5: all cases other than case 4
+        else {
+            canMatch |= checkCanMatch(s, si, p, pi) && dfs(s, si + 1, p, pi + 1, visited, memo);
+        }
+
+        // cache the result into memo in order to saving from overhead of repeated calculation in the future
+        visited[si][pi] = true;
+        memo[si][pi] = canMatch;
+        return canMatch;
+    }
+
+    private boolean checkPattern(String p, int pi) {
+        int pLen = p.length();
+        for (int i = pi; i < pLen; ++i) {
+            if (p.charAt(i) != '*') return false;
+        }
+        return true;
+    }
+
+    private boolean checkCanMatch(String source, int si, String pattern, int pi) {
+        char s = source.charAt(si), p = pattern.charAt(pi);
+        return p == '?' || s == p;
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
+ * Review DFS + Memoization solution in Java.
+ *
+ * @author Haoyang Fan
  * @version 3.0
  * @since 05-15-2019
  */
