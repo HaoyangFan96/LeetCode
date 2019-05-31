@@ -72,6 +72,86 @@ Output: false
  */
 
 /**
+ * Review DFS + Memoization solution in Java.
+ *
+ * @author Haoyang Fan
+ * @version 4.0
+ * @since 05-31-2019
+ */
+class Solution {
+    public boolean isMatch(String s, String p) {
+        int sLen = s.length(), pLen = p.length();
+        // initialize memoization array to cache the result of DFS later
+        boolean[][] visited = new boolean[sLen][pLen];
+        boolean[][] memo = new boolean[sLen][pLen];
+
+        return dfs(s, 0, p, 0, visited, memo);
+    }
+
+    private boolean dfs(String s, int si, String p, int pi, boolean[][] visited, boolean[][] memo) {
+        int sLen = s.length(), pLen = p.length();
+
+        // case 1: we have matched every character of pattern, then check to see
+        // if we've also matched every character of source
+        if (pi == pLen) return si == sLen;
+
+        // case 2: we have matched every character of source, then check to see
+        // if there are even number of characters remaining in the pattern string,
+        // and each regular character must be followed by a asterisk
+        if (si == sLen) return checkPattern(p, pi);
+
+        // case 3: this combination of (si, pi) is already calculated before and cached in memo
+        if (visited[si][pi]) return memo[si][pi];
+
+        boolean canMatch = false;
+
+        // case 4: current character is followed by a asterisk
+        if (pi < pLen - 1 && p.charAt(pi + 1) == '*') {
+            // sub case 1: asterisk repeat current character 0 times
+            canMatch |= dfs(s, si, p, pi + 2, visited, memo);
+
+            // sub case 2: asterisk repeat current character 1 time
+            canMatch |= checkCanMatch(s, si, p, pi) && dfs(s, si + 1, p, pi, visited, memo);
+        }
+
+        // case 5: other cases than 4
+        else {
+            canMatch |= checkCanMatch(s, si, p, pi) && dfs(s, si + 1, p, pi + 1, visited, memo);
+        }
+
+        // cache the result in memo and then return
+        visited[si][pi] = true;
+        memo[si][pi] = canMatch;
+        return canMatch;
+    }
+
+    private boolean checkPattern(String pattern, int pi) {
+        int pLen = pattern.length();
+        // check number of characters remaining
+
+        int num = pLen - pi;
+
+        // if there are odd number of characters remaining, return false
+        if ((num & 1) == 1) return false;
+
+        // check to see if each character is followed by a asterisk
+        for (int i = pi; i < pLen; i += 2) {
+            if (pattern.charAt(i + 1) != '*') return false;
+        }
+
+        return true;
+    }
+
+    private boolean checkCanMatch(String source, int si, String pattern, int pi) {
+        char s = source.charAt(si), p = pattern.charAt(pi);
+
+        return p == '.' || s == p;
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+
+/**
  * Review DFS + backtracking solution in Java.
  *
  * @author Haoyang Fan
