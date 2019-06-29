@@ -14,6 +14,7 @@
 #### Code
 -   [DFS Java solution](./DepthFirstSearchSolution.java)
 -   [BFS Java solution](./BreadthFirstSearchSolution.java)
+-   [Union Find Java Solution](./UnionFindSolution.java)
 
 #### Complexity
 -   Time: `O(mn)` where m is the number of rows and n is the number of cols
@@ -24,7 +25,7 @@
 2.  (DFS/BFS)具体的思路非常简单：遍历一遍grid，对于每一个新发现的陆地，将岛屿的数量加一，然后基于这个当前的陆地进行DFS或者BFS。在此过程中将访问的陆地标记，这样的话之后我们便不会重复访问之前已经访问过的陆地
 3.  DFS: 用recursion（自带stack）或者自己弄个stack来iterative的写
 4.  BFS: 直接起queue
-5.  TODO: Union Find 写一遍， 再将DFS转成Iterative的写一遍
+5.  Union Find: 基本就是检测自己对于模版的使用熟悉程度
 
 #### Mistakes I have made:
 1.  BFS中不需要在solution里面创建queue然后把它pass到bfs helper method中，直接在helper method中起一个queue就好了
